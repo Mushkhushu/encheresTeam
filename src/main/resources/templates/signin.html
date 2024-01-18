@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{:: #ressource-css})
+																							}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription</title>
+
+<th:block id="ressource-css">
+	<link rel="stylesheet" data-th-href="@{/css/tp-form.css}">
+</th:block>
+</head>
+
+<body>
+<main>
+	<div class="error" data-th-if="${not #lists.isEmpty(exceptions)}">
+		<ul>
+			<li data-th-each="exception : ${exceptions}" data-th-text="${exception}"></li>
+		</ul>
+	</div>
+	
+		<form data-th-action="@{/signin}" data-th-object="${utilisateur}" method="post">
+		
+			<h1>Inscription au site d'enchères</h1>
+			<ul class="flex-outer">
+			
+				<li><label for="pseudo">Pseudo :</label> <input
+					id="inputUser" type="text" name="pseudo" required
+					data-th-field="*{pseudo}"/></li>
+					
+					<li class="error" data-th-errors="*{pseudo}"></li>
+					
+					<li><label for="prenom">Prénom :</label> <input
+					id="inputUser" type="text" name="prenom" required
+					data-th-field="*{prenom}" /></li>
+					
+					<li class="error" data-th-errors="*{prenom}"></li>
+					
+					<li><label for="nom">Nom :</label> <input
+					id="inputUser" type="text" name="nom" required
+					data-th-field="*{nom}"/></li>
+					
+					<li class="error" data-th-errors="*{nom}"></li>
+					
+					<li><label for="email">Email :</label> <input
+					id="inputUser" type="text" name="email" required
+					data-th-field="*{email}" /></li>
+					
+					<li class="error" data-th-errors="*{email}"></li>
+					
+					<li><label for="telephone">Téléphone :</label> <input
+					id="inputUser" type="text" name="telephone"
+					data-th-field="*{telephone}"/></li>
+					
+					<li class="error" data-th-errors="*{telephone}"></li>
+					
+					<li><label for="rue">Rue :</label> <input
+					id="inputUser" type="text" name="rue" 
+					data-th-field="*{rue}" /></li>
+					
+					<li><label for="codePostal">Code Postal :</label> <input
+					id="inputUser" type="text" name="codePostal" 
+					data-th-field="*{codePostal}" /></li>
+					
+					<li class="error" data-th-errors="*{codePostal}"></li>
+					
+					<li><label for="ville">Ville :</label> <input
+					id="inputUser" type="text" name="ville" 
+					data-th-field="*{ville}"/></li>
+					
+				<li><label for="motDePasse">Mot de passe :</label> <input
+					id="inputPwd" type="password" name="motDePasse" required 
+					data-th-field="*{motDePasse}" /></li>
+					
+					<li class="error" data-th-errors="*{motDePasse}"></li>
+					
+				<li>
+				<li><label for="confMotDePasse">Confirmation du mot de passe :</label>
+				<input id="inputPwd" type="password" data-th-value="confMotDePasse" name="confMotDePasse" required/>
+				</li>
+					
+				<li>
+					<button type="submit">Créer</button>
+				</li>
+				<li>
+					<button type="reset">Annuler</button>
+				</li>
+			</ul>
+		</form>
+	</main>
+</body>
+</html>

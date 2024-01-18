@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{:: #ressource-css})
+																							}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion</title>
+
+<th:block id="ressource-css">
+	<link rel="stylesheet" data-th-href="@{/css/tp-form.css}">
+</th:block>
+</head>
+
+<body>
+	<main>
+		<form data-th-action="@{/login}" method="post">
+			<h1>Connexion au site d'enchères</h1>
+			<ul class="flex-outer">
+				<li><label for="inputUser">Identifiant :</label> <input
+					id="inputUser" type="text" name="username" required /></li>
+				<li><label for="inputPwd">Mot de passe :</label> <input
+					id="inputPwd" type="password" name="password" required /></li>
+				<li>
+					<button type="submit">Connexion</button>
+				</li>
+				<li>
+					<a data-th-href="@{/signin}">Créer un compte</a>
+				</li>
+			</ul>
+		</form>
+	</main>
+</body>
+
+</html>

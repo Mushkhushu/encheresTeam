@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{})
+																							}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accueil</title>
+</head>
+
+<body>
+	<main class="center-main">
+		<section class="center-section">
+			<h1 style="text-align: center;">Liste des enchères</h1>
+
+			<h2>Filtres :</h2>
+				<form action="/search" method="POST" style="display: flex;">
+				
+					<div>
+						<ul>
+							<li><input type="search" id="filtre-search"
+								name="filtre-search" placeholder="Le nom de l'article contient">
+							</li>
+
+							<li><label for="categorie">Catégorie :</label> <select
+								name="categorie" placeholder="Toutes">
+									<option value="" selected>Toutes</option>
+									<option data-th-each="categorie:${listeCategories}" data-th-text="${categorie.libelle}">Autres</option>
+							</select></li>
+						</ul>
+
+						<ul class="statut_enchere" style="display: flex;" >
+						<!-- data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}" -->
+							<div>
+								<li><input type="radio" name="statut_enchere" id="achats"
+									value="achats"> <label for="achats">Achats</label></li>
+								<li><input type="checkbox" name="encheres_ouvertes"
+									id="encheres_ouvertes" checked> <label
+									for="encheres_ouvertes">Enchères ouvertes</label></li>
+								<li><input type="checkbox" name="encheres_en_cours"
+									id="encheres_en_cours"> <label for="encheres_en_cours">Mes
+										enchères en cours</label></li>
+								<li><input type="checkbox" name="encheres_remportees"
+									id="encheres_remportees"> <label
+									for="encheres_remportees">Mes enchères remportées</label></li>
+							</div>
+
+							<div>
+								<li><input type="radio" name="statut_enchere" id="ventes"
+									value="ventes"> <label for="ventes">Mes ventes</label>
+								</li>
+								<li><input type="checkbox" name="ventes_non_debutees"
+									id="ventes_non_debutees"> <label
+									for="ventes_non_debutees">Ventes non débutées</label></li>
+								<li><input type="checkbox" name="ventes_en_cours"
+									id="ventes_en_cours"> <label for="ventes_en_cours">Mes
+										ventes en cours</label></li>
+								<li><input type="checkbox" name="ventes_terminees"
+									id="ventes_terminees"> <label for="ventes_terminees">Mes
+										ventes terminées</label></li>
+							</div>
+						</ul>
+					</div>
+	
+
+			<div>
+				<button type="submit">Rechercher</button>
+			</div>
+			</form>
+
+			<div class="liste_encheres">
+			
+			</div>
+
+		</section>
+	</main>
+</body>
+</html>
