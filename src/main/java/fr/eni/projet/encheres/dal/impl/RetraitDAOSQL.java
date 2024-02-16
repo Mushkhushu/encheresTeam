@@ -13,16 +13,18 @@ import fr.eni.projet.encheres.dal.dao.RetraitDAO;
 
 @Repository
 public class RetraitDAOSQL implements RetraitDAO {
-	
+
 //les attributs
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	private JdbcTemplate jdbcTemplate;
+
 //le constructeur	
 	public RetraitDAOSQL(NamedParameterJdbcTemplate namedParameterJdbcTemplate, JdbcTemplate jdbcTemplate) {
 		super();
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 		this.jdbcTemplate = jdbcTemplate;
 	}
+
 //les méthodes CRUD	
 //CREATE créer un point de retrait à partir d'un article (par défaut: adresse du vendeur)	
 	@Override
@@ -34,7 +36,7 @@ public class RetraitDAOSQL implements RetraitDAO {
 		namedParameters.addValue("rue", article.getUtilisateur().getRue());
 		namedParameters.addValue("code_postal", article.getUtilisateur().getCodePostal());
 		namedParameters.addValue("ville", article.getUtilisateur().getVille());
-		namedParameterJdbcTemplate.update(sql, namedParameters);		
+		namedParameterJdbcTemplate.update(sql, namedParameters);
 	}
 
 //READ récupérer une adresse de retrait à partir du noArticle
@@ -43,26 +45,26 @@ public class RetraitDAOSQL implements RetraitDAO {
 		String sql = "SELECT no_article, rue, code_postal, ville FROM RETRAITS WHERE no_article =:noArticle; ";
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 		namedParameters.addValue("noArticle", noArticle);
-		Retrait retrait = namedParameterJdbcTemplate.queryForObject(sql, namedParameters, 
+		Retrait retrait = namedParameterJdbcTemplate.queryForObject(sql, namedParameters,
 				new BeanPropertyRowMapper<>(Retrait.class));
 		return retrait;
 	}
-	
+
 //UPDATE  un retrait (selon le noArticle)
 	@Override
 	public void updateRetrait(Retrait retrait) {
-	    String sql = "UPDATE RETRAITS SET rue = :rue, code_postal = :codePostal, ville = :ville WHERE no_article = :noArticle;";
-	    BeanPropertySqlParameterSource namedParameters = new BeanPropertySqlParameterSource(retrait);
+		String sql = "UPDATE RETRAITS SET rue = :rue, code_postal = :codePostal, ville = :ville WHERE no_article = :noArticle;";
+		BeanPropertySqlParameterSource namedParameters = new BeanPropertySqlParameterSource(retrait);
 		namedParameterJdbcTemplate.update(sql, namedParameters);
 	}
-	
+
 //DELETE un retrait	 à partir du noArticle
 	@Override
 	public void deleteRetrait(Integer noArticle) {
-	    String sql = "DELETE FROM RETRAITS WHERE no_article = :noArticle;";
-	    MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-	    namedParameters.addValue("noArticle", noArticle);
-	    namedParameterJdbcTemplate.update(sql, namedParameters);
-	}	
-	
+		String sql = "DELETE FROM RETRAITS WHERE no_article = :noArticle;";
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		namedParameters.addValue("noArticle", noArticle);
+		namedParameterJdbcTemplate.update(sql, namedParameters);
+	}
+
 }

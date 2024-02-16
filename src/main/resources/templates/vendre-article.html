@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{})
+																							}">
+<head>
+<meta charset="UTF-8">
+<title>Vendre un Article</title>
+</head>
+<body>
+	<main>
+		<form data-th-action="@{/enchere/vendre}" method="post">
+		
+		<fieldset data-th-object="${article}">
+			<h1>Nouvelle Vente</h1>
+			<ul class="flex-outer">
+			
+				<li><label for="nomArticle">Article : </label> <input
+					id="inputUser" type="text" name="nomArticle" required
+					data-th-field="*{nomArticle}"/></li>
+					
+					<li class="error" data-th-errors="*{nomArticle}"></li>
+					
+					<li><label for="description" id="inputUser" name="description" required
+					data-th-field="*{description}">Description : </label> 
+					<textarea id="description" name="description" rows="5" cols="33">
+					</textarea></li>
+					
+					<li class="error" data-th-errors="*{description}"></li>
+					
+					<li><label for="categorie">Catégorie :</label> <select
+								name="noCategorie">
+								<option value="" selected>choisir</option>
+								<option data-th-each="categorie:${listeCategories}" 
+								data-th-text="${categorie.libelle}"
+								data-th-value="${categorie.noCategorie}">Autres</option>
+						</select></li>
+					
+					<li class="error" data-th-errors="*{categorie}"></li>
+					
+					<li><label for="miseAPrix">Mise à prix : </label> <input
+					id="inputUser" type="number" name="miseAPrix" required
+					data-th-field="*{miseAPrix}" /></li>
+					
+					<li class="error" data-th-errors="*{miseAPrix}"></li>
+					
+					<li><label for="dateDebutEncheres">Début de l'enchère : </label> <input
+					id="inputUser" type="date" name="dateDebutEncheres"
+					data-th-field="*{dateDebutEncheres}"/></li>
+					
+					<li class="error" data-th-errors="*{dateDebutEncheres}"></li>
+					
+					<li><label for="dateFinEncheres">Fin de l'enchère :</label> <input
+					id="inputUser" type="date" name="dateFinEncheres" 
+					data-th-field="*{dateFinEncheres}" /></li>
+					
+					<li class="error" data-th-errors="*{dateFinEncheres}"></li>
+					</ul>
+					</fieldset>
+					
+					<fieldset data-th-object="${utilisateur}">
+					<legend>Retrait : </legend>
+					<!-- <form data-th-action="@{/enchere/vendre}" data-th-object="${utilisateur}" method="get"> -->
+						<ul class="flex-outer">
+						<li><label for="rue">Rue :</label> <input
+						id="inputUser" type="text" name="rue" 
+						data-th-field="*{rue}" /></li>
+					
+						<li class="error" data-th-errors="*{rue}"></li>
+					
+						<li><label for="codePostal">Code Postal :</label> <input
+						id="inputUser" type="text" name="codePostal" 
+						data-th-field="*{codePostal}" /></li>
+						
+						<li class="error" data-th-errors="*{codePostal}"></li>
+						
+						<li><label for="ville">Ville :</label> <input
+						id="inputUser" type="text" name="ville" 
+						data-th-field="*{ville}"/></li>
+						
+						<li class="error" data-th-errors="*{ville}"></li>
+						</ul>
+					<!-- </form> -->
+					</fieldset>
+				<ul class="flex-outer">
+					<li>
+						<button type="submit">Enregistrer</button>
+					</li>
+					<li>
+						<button type="reset">Annuler</button>
+					</li>
+				</ul>
+		   </form>					
+	</main>
+
+</body>
+</html>

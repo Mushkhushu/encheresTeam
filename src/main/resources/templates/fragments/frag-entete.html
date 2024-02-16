@@ -1,33 +1,39 @@
 <header xmlns:th="http://www.thymeleaf.org"
 	data-th-fragment="frag-entete">
 
-	<div>
-		<img alt="Logo" src="/images/image3.jpg" sizes="3x3">
+	<div data-th-if="${#authorization.expression('isAuthenticated()')}">
+        <a th:href="@{/}">
+            <img alt="Logo" src="/images/image3.jpg" sizes="3x3">
+        </a>
+    </div>
+	<div data-th-unless="${#authorization.expression('isAuthenticated()')}">
+	    <img alt="Logo" src="/images/image3.jpg" sizes="3x3">
 	</div>
 
 	<h1 id="nav-title">
-		<a href="/">ENI - Enchères</a>
+		<a href="/">Titi crédit
+					<br>& Grosses enchères</a>
 	</h1>
 
 	<nav>
 		<ul>
-			<li data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}">
+			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
 				<a href="/">Enchères</a>
 			</li>
-			<li	data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}">
-				<a href="/">Vendre un article</a>
+			<li	data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a href="/enchere/vendre">Vendre un article</a>
 			</li>
-			<li	data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}">
-				<a href="/">Mon profil</a>
+			<li	data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a href="/enchere/monProfil">Mon profil</a>
 			</li>
-			<li	data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}">
-				<a href="/">Accès Admin</a>
+			<li	data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a href="/" style="text-decoration:line-through;">Accès Admin</a>
 			</li>
-			<!-- le lien connexion est affichÃ© uniquement si on est pas connectÃ© -->
+			<!-- le lien connexion est affichée uniquement si on est pas connecté -->
 			<li data-th-if="${!#authorization.expression('isAuthenticated()')}">
-				<a href="/login"> S'inscrire - Se connecter</a>
+				<a href="/login"> S'inscrire / Se connecter</a>
 			</li>
-			<!-- le lien dÃ©connexion est affichÃ© uniquement si on est connectÃ© -->
+			<!-- le lien déconnexion est affichée uniquement si on est connecté -->
 			<li data-th-if="${#authorization.expression('isAuthenticated()')}">
 				<a href="/logout"> Déconnexion</a>
 			</li>

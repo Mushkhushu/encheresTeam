@@ -6,7 +6,10 @@ import fr.eni.projet.encheres.bo.Retrait;
 public interface RetraitDAO {
 
 	void insertRetraitPoint(Article article);
+
 	Retrait ReadById(Integer noArticle);
+
 	void updateRetrait(Retrait retrait);
+
 	void deleteRetrait(Integer noArticle);
 }

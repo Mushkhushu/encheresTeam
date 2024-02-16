@@ -14,10 +14,12 @@ public class Retrait {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-	}	
+	}
+
 	public Retrait() {
 		super();
-	}	
+	}
+
 //les G/S
 	public Integer getNoArticle() {
 		return noArticle;
@@ -26,7 +28,7 @@ public class Retrait {
 	public void setNoArticle(Integer noArticle) {
 		this.noArticle = noArticle;
 	}
-	
+
 	public String getRue() {
 		return rue;
 	}
@@ -39,7 +41,7 @@ public class Retrait {
 		return codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
@@ -50,7 +52,6 @@ public class Retrait {
 	public void setVille(String ville) {
 		this.ville = ville;
 	}
-	
 
 //le ToString
 	@Override

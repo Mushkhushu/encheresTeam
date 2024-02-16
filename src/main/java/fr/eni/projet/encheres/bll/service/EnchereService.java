@@ -8,9 +8,9 @@ import fr.eni.projet.encheres.bo.Enchere;
 public interface EnchereService {
 
 	void addEncherir(Article article);
-	
-	List <Enchere> getEncherebyUserId(Integer noUtilisateur);
-	
-	List <Enchere> getEncherebyArticleId(Integer noArticle);
-	
+
+	List<Enchere> getEncherebyUserId(Integer noUtilisateur);
+
+	List<Enchere> getEncherebyArticleId(Integer noArticle);
+
 }

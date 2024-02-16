@@ -1,80 +1,164 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
-																							contenu=~{:: main},
-																							ressource=~{})
-																							}">
+	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title}, contenu=~{:: main}, ressource=~{::#ressource})}">
+	
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<th:block id="ressource">
+<link rel="stylesheet" data-th-href="@{/css/tp-table.css}">
+</th:block>
 <title>Accueil</title>
 </head>
 
 <body>
 	<main class="center-main">
-		<section class="center-section">
-			<h1 style="text-align: center;">Liste des enchères</h1>
-
-			<h2>Filtres :</h2>
-				<form action="/search" method="POST" style="display: flex;">
-				
-					<div>
-						<ul>
-							<li><input type="search" id="filtre-search"
-								name="filtre-search" placeholder="Le nom de l'article contient">
-							</li>
-
-							<li><label for="categorie">Catégorie :</label> <select
-								name="categorie" placeholder="Toutes">
-									<option value="" selected>Toutes</option>
-									<option data-th-each="categorie:${listeCategories}" data-th-text="${categorie.libelle}">Autres</option>
-							</select></li>
-						</ul>
-
-						<ul class="statut_enchere" style="display: flex;" >
-						<!-- data-th-if="${#authorization.expression('hasRole(''UTILISATEUR'')')}" -->
-							<div>
-								<li><input type="radio" name="statut_enchere" id="achats"
-									value="achats"> <label for="achats">Achats</label></li>
-								<li><input type="checkbox" name="encheres_ouvertes"
-									id="encheres_ouvertes" checked> <label
-									for="encheres_ouvertes">Enchères ouvertes</label></li>
-								<li><input type="checkbox" name="encheres_en_cours"
-									id="encheres_en_cours"> <label for="encheres_en_cours">Mes
-										enchères en cours</label></li>
-								<li><input type="checkbox" name="encheres_remportees"
-									id="encheres_remportees"> <label
-									for="encheres_remportees">Mes enchères remportées</label></li>
-							</div>
-
-							<div>
-								<li><input type="radio" name="statut_enchere" id="ventes"
-									value="ventes"> <label for="ventes">Mes ventes</label>
-								</li>
-								<li><input type="checkbox" name="ventes_non_debutees"
-									id="ventes_non_debutees"> <label
-									for="ventes_non_debutees">Ventes non débutées</label></li>
-								<li><input type="checkbox" name="ventes_en_cours"
-									id="ventes_en_cours"> <label for="ventes_en_cours">Mes
-										ventes en cours</label></li>
-								<li><input type="checkbox" name="ventes_terminees"
-									id="ventes_terminees"> <label for="ventes_terminees">Mes
-										ventes terminées</label></li>
-							</div>
-						</ul>
-					</div>
+	<br><br>
+		<h1> Liste des enchères</h1>
 	
+		<section class="center-section">
+		
+			<h2>Recherche</h2>
+			<br>
 
-			<div>
-				<button type="submit">Rechercher</button>
-			</div>
+			<h3>Filtres :</h3>
+			<br>
+			<form data-th-action="@{/enchere/search}" method="POST" style="display: flex;">
+				<div>
+					<ul style="list-style:none;">
+					<div class="rechercheNom">
+						<li><input type="search" id="rechercheNom"
+							name="rechercheNom" placeholder="Le nom de l'article contient">
+							<button type="submit" id="search-button">&#x1F50E;&#xFE0E;</button>
+						</li></div>
+						<br> <br>
+						<li><label for="noCategorie">Catégorie :</label> <select
+							name="noCategorie" placeholder="Toutes">
+								<option value="22" selected>Toutes</option>
+								<option data-th-each="categorie:${listeCategories}"
+									data-th-text="${categorie.libelle}"data-th-value="${categorie.noCategorie}">Autres</option>
+						</select></li>
+					</ul>
+					<br> <br>
+
+					<ul data-th-if="${#authorization.expression('isAuthenticated')}"class="statut_enchere">
+						
+						<div>
+							<li><input type="radio" name="statut_enchere" id="achats"
+								value="achats"> <label for="achats">Achats</label></li>
+								<br>
+							<li><input type="checkbox" name="encheres_ouvertes"
+								id="encheres_ouvertes" checked> <label
+								for="encheres_ouvertes">Enchères ouvertes</label></li>
+							<li><input type="checkbox" name="encheres_en_cours"
+								id="encheres_en_cours"> <label for="encheres_en_cours">Mes
+									enchères en cours</label></li>
+							<li><input type="checkbox" name="encheres_remportees"
+								id="encheres_remportees"> <label
+								for="encheres_remportees">Mes enchères remportées</label></li>
+						</div>
+						<br>
+						<div>
+							<li><input type="radio" name="statut_enchere" id="ventes"
+								value="ventes"> <label for="ventes">Mes ventes</label></li>
+								<br>
+							<li><input type="checkbox" name="ventes_non_debutees"
+								id="ventes_non_debutees"> <label
+								for="ventes_non_debutees">Ventes non débutées</label></li>
+								
+							<li><input type="checkbox" name="ventes_en_cours"
+								id="ventes_en_cours"> <label for="ventes_en_cours">Mes
+									ventes en cours</label></li>
+									
+							<li><input type="checkbox" name="ventes_terminees"
+								id="ventes_terminees"> <label for="ventes_terminees">Mes
+									ventes terminées</label></li>
+						</div>
+					</ul>
+				</div>
+
+
+			
 			</form>
 
-			<div class="liste_encheres">
-			
-			</div>
+	</section>
+<section class="center-section" data-th-if="${not #lists.isEmpty(articlesEnCours)}">
+<h2>Liste des articles en cours</h2>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th>Prix initial</th>
+					<th>Vendeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="article : ${articlesEnCours}">
+					
+					<td data-th-text="${article.nomArticle}"></td>
+					
+					<td data-th-text="${article.description}"></td>
+					
+					<td data-th-text="${article.prixVente}"></td>
+				
+				<td >
+		<div data-th-if="${#authorization.expression('isAuthenticated()')}">
+				<a data-th-href="@{/enchere/vendeur/{id}(id=${article.utilisateur.noUtilisateur})}">
+					<span data-th-text="${article.utilisateur.pseudo}"></span>
+				</a>
+		</div>
+		   <div data-th-if="${not #authorization.expression('isAuthenticated')}">
+        <span data-th-text="${article.utilisateur.pseudo}"></span>
+    	</div>
+				</td>
+			</tbody>
+		</table>
+</section>
 
-		</section>
+<section class="center-section" data-th-if="${not #lists.isEmpty(articlesResults)}">
+<h2>Résultats de votre recherche</h2>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Nom de l'aticle</th>
+					<th>Description</th>
+					<th>Etat</th>
+					<th>Prix initial</th>
+					<th>Vendeur</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr data-th-each="article : ${articlesResults}">
+					
+					<td data-th-text="${article.nomArticle}"></td>
+					<td data-th-text="${article.description}"></td>
+					<td data-th-text="${article.etatVente}"></td>
+					<td data-th-text="${article.prixVente}"></td>
+				
+				<td>
+    <div data-th-if="${#authorization.expression('isAuthenticated()')}">
+        <a data-th-href="@{/enchere/vendeur/{id}(id=${article.utilisateur.noUtilisateur})}">
+            <span data-th-text="${article.utilisateur.pseudo}"></span>
+        </a>
+    </div>
+    <div data-th-if="${not #authorization.expression('isAuthenticated')}">
+        <span data-th-text="${article.utilisateur.pseudo}"></span>
+    </div>
+</td>
+				
+			</tbody>
+		</table>
+
+</section>
+
+<section class="center-section" data-th-if="${#lists.isEmpty(articlesResults)}">
+
+</section>
+
+
 	</main>
 </body>
 </html>

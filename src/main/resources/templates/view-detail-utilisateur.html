@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{})
+																							}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil vendeur</title>
+</head>
+ <body>
+  <main class="center-main">
+  		<div style="display : flex; flex-direction:column;">
+  		<div>
+  		<form data-th-object="${utilisateur}">
+  		<fieldset>
+  		<legend>Détails du profil</legend>
+  		<ul class="flex-outer">
+			
+				<li><label for="pseudo">Pseudo :</label> 
+				<input id="inputUser" type="text" name="pseudo" disabled data-th-field="*{pseudo}" />
+				</li>
+					
+					
+				<li><label for="prenom">Prénom :</label> 
+				<input id="inputUser" type="text" name="prenom" disabled data-th-field="*{prenom}"/>
+				</li>
+					
+					
+				<li><label for="nom">Nom :</label> 
+				<input id="inputUser" type="text" name="nom" disabled data-th-field="*{nom}" />
+				</li>
+					
+				<li><label for="email">Email :</label> 
+				<input id="inputUser" type="text" name="email" disabled data-th-field="*{email}"/>
+				</li>
+					
+					
+				<li><label for="telephone">Téléphone :</label> 
+				<input id="inputUser" type="text" name="telephone" disabled data-th-field="*{telephone}"/>
+				</li>
+					
+					
+				<li><label for="rue">Rue :</label> 
+				<input id="inputUser" type="text" name="rue" disabled data-th-field="*{rue}"/>
+				</li>
+					
+				<li><label for="codePostal">Code Postal :</label>
+				<input id="inputUser" type="text" name="codePostal" disabled data-th-field="*{codePostal}"/>
+				</li>
+					
+				<li><label for="ville">Ville :</label> 
+				<input id="inputUser" type="text" name="ville" disabled data-th-field="*{ville}"/>
+				</li>						
+		</ul>
+		</fieldset>
+  		</form>
+  		</div>
+  		
+  		<div>
+  		
+  		<form data-th-action="@{/enchere/modifier}" method="GET" data-th-if="${utilisateurConnecte.pseudo eq utilisateur.pseudo}">
+  		<fieldset>
+  			<button>Modifier</button>
+  		</fieldset>
+  		</form>
+  		</div>
+  		</div>
+  		
+  </main>
+ </body>
+ </html>

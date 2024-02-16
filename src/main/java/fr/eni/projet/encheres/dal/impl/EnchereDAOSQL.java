@@ -23,30 +23,29 @@ public class EnchereDAOSQL implements EnchereDAO {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 		this.jdbcTemplate = jdbcTemplate;
 	}
-	  
-	  @Override
+
+	@Override
 	public void addEncherir(Article article) {
-		
+
 		String sql = "INSERT INTO ENCHERES(no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (:noUtilisateur, :noArticle, :dateEnchere, :montantEnchere)";
-		
+
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
-		namedParameters.addValue("noArticle",article.getNoArticle());
-		namedParameters.addValue("noUtilisateur",article.getUtilisateur().getNoUtilisateur());
-		
-		}
-		
-	
+		namedParameters.addValue("noArticle", article.getNoArticle());
+		namedParameters.addValue("noUtilisateur", article.getUtilisateur().getNoUtilisateur());
+
+	}
+
 	@Override
 
 	// Selectionner un article par son ID
 
-	public List <Enchere> getEncherebyArticleId(Integer noArticle) {
+	public List<Enchere> getEncherebyArticleId(Integer noArticle) {
 		String sql = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article =:noArticle; ";
 
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 		namedParameters.addValue("noArticle", noArticle);
 
-		List <Enchere> listeEncheres = namedParameterJdbcTemplate.query(sql, namedParameters,
+		List<Enchere> listeEncheres = namedParameterJdbcTemplate.query(sql, namedParameters,
 				new BeanPropertyRowMapper<>(Enchere.class));
 		return listeEncheres;
 
@@ -56,18 +55,16 @@ public class EnchereDAOSQL implements EnchereDAO {
 
 	// Selectionner un utilisateur par son ID
 
-	public List <Enchere> getEncherebyUserId(Integer noUtilisateur){
-		
+	public List<Enchere> getEncherebyUserId(Integer noUtilisateur) {
+
 		String sql = "SELECT no_utilisateur, no_article, date_enchere, montant_enchere FROM ENCHERES WHERE no_article =:noArticle; ";
 
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 		namedParameters.addValue("noUtilisateur", noUtilisateur);
 
-		List <Enchere> listeEncheres = namedParameterJdbcTemplate.query(sql, namedParameters,
+		List<Enchere> listeEncheres = namedParameterJdbcTemplate.query(sql, namedParameters,
 				new BeanPropertyRowMapper<>(Enchere.class));
 		return listeEncheres;
 	}
 
-	
-	
 }

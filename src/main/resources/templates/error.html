@@ -5,7 +5,7 @@
 														ressource=~{:: #ressource-css})
 										}">
 <head>
-<title>Attention</title>
+<title>Erreur</title>
 <th:block id="ressource-css">
 	<link rel="stylesheet" data-th-href="@{/css/demo-error-http.css}" />
 	<link rel="stylesheet" data-th-href="@{/css/tp-form.css}" />
@@ -14,18 +14,20 @@
 </head>
 <body>
 	<main>
-		<h1 class="cards" data-th-text="Erreur + ${status}"></h1>
+		<h1 class="cards" data-th-text="'ERREUR ' + ${status}"></h1>
+		<div><img src="/images/image_404.jpg" alt="Image page 404" class="image404"></div>
+		<br>
 		<form>
 			<ul class="flex-outer cards">
 				<li data-th-switch="${status}">
 					<label data-th-case="403">Vous n'êtes pas autorisé à accéder à la ressource ...</label>
-					<label data-th-case="404">Cette ressource n'existe pas</label>
+					<label data-th-case="404">Cette ressource n'existe pas...</label>
 					<label data-th-case="500">Le server n'est pas joignable, rappelez ultérieurement</label>
 					<label data-th-case="999">Compte inconnu !</label>
-					<label data-th-case="*">YOU SUCK ! (mais je sais pas pourquoi)</label>
+					<label data-th-case="*">Try again! </label>
 				</li>
 				<li>
-					<a data-th-href="@{/}">Retour case départ</a>
+					<a data-th-href="@{/}">Retour à la case départ</a>
 				</li>
 			</ul>
 		</form>

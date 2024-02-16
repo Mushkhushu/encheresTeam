@@ -37,19 +37,18 @@ public class ConnexionController {
 
 	// la méthode POST pour s'inscrire
 	@PostMapping("/signin")
-	public String sinscrire(@Valid  @ModelAttribute("utilisateur") Utilisateur utilisateur,
-			BindingResult bindingResult,
-			@RequestParam("confMotDePasse") String confMotDePasse,
-			Model model) {
+	public String sinscrire(@Valid @ModelAttribute("utilisateur") Utilisateur utilisateur, BindingResult bindingResult,
+			@RequestParam("confMotDePasse") String confMotDePasse, Model model) {
+
 		if (bindingResult.hasErrors()) {
 			return "signin";
 		}
 		if (!utilisateur.getMotDePasse().equals(confMotDePasse)) {
 			bindingResult.rejectValue("motDePasse", "confirmation.incorrecte",
 					"Les deux saisies doivent être identiques");
-				return "signin";
+			return "signin";
 		}
-		//RECUPERER EXCEPTION
+		// RECUPERER EXCEPTION
 		try {
 			this.utilisateurService.add(utilisateur);
 		} catch (BusinessException e) {
@@ -57,11 +56,9 @@ public class ConnexionController {
 			e.printStackTrace();
 			return "signin";
 		}
-		System.out.println(utilisateur);
 		return "redirect:/";
 	}
 }
-
 
 //@RequestParam("pseudo") String pseudo,
 //@RequestParam("prenom") String prenom,

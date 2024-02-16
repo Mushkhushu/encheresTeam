@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	data-th-replace="~{layouts/layout :: frag-layout(titre=~{:: title},
+																							contenu=~{:: main},
+																							ressource=~{})
+																							}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profil vendeur</title>
+</head>
+ <body>
+  <main class="center-main">
+  		<form data-th-object="${utilisateur}"  data-th-action="@{/enchere}" method="POST">
+  		<fieldset>
+  		<legend>Modifier mon profil</legend>
+  		<ul class="flex-outer">
+				<div style="display : flex;">
+				
+				
+			
+				<input type="hidden"data-th-field="*{noUtilisateur}" />
+				
+				<div>
+				<li><label for="pseudo">Pseudo :</label> 
+				<input id="inputUser" type="text" name="pseudo" required data-th-field="*{pseudo}" />
+				</li>
+					
+					
+				<li><label for="prenom">Prénom :</label> 
+				<input id="inputUser" type="text" name="prenom" required data-th-field="*{prenom}"/>
+				</li>
+					
+				<li><label for="telephone">Téléphone :</label> 
+				<input id="inputUser" type="text" name="telephone" data-th-field="*{telephone}"/>
+				</li>
+					
+					
+				<li><label for="codePostal">Code Postal :</label>
+				<input id="inputUser" type="text" name="codePostal" data-th-field="*{codePostal}"/>
+				</li>
+				
+				
+				<li><label for="mdpActuel">Mot de passe actuel :</label>
+					<input id="mdpActuel" type="password" name="mdpActuel" required data-th-field="*{motDePasse}">
+				</li>
+					
+				<li><label for="mdpNouveau">Nouveau mot de passe :</label> 
+				<input id="mdpNouveau" type="password" name="mdpNouveau"/>
+				</li>
+				
+		
+				</div>	
+				<div>
+				<li><label for="nom">Nom :</label> 
+				<input id="inputUser" type="text" name="nom" required data-th-field="*{nom}" />
+				</li>
+					
+					
+				<li><label for="email">Email :</label> 
+				<input id="inputUser" type="text" name="email" required data-th-field="*{email}"/>
+				</li>
+				
+						
+					
+				<li><label for="rue">Rue :</label> 
+				<input id="inputUser" type="text" name="rue"  data-th-field="*{rue}"/>
+				</li>
+					
+					
+				<li><label for="ville">Ville :</label> 
+				<input id="inputUser" type="text" name="ville" data-th-field="*{ville}"/>
+				</li>		
+						
+	
+				</div>	
+				</div>
+				
+				<li><label for="credit">Crédit :</label>
+				<input id="credit" name="credit" data-th-field="*{credit}" disabled>
+				</li>	
+		</ul>
+		<button type="submit" data-th-formaction="@{/enchere/monProfil}">Enregistrer</button>
+		<button type="submit" data-th-formaction="@{/enchere/supprimer}">Supprimer mon compte</button>
+  		</fieldset>
+  		</form>
+  </main>
+ </body>
+ </html>

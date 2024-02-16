@@ -3,6 +3,7 @@ table {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 90%;
+
 }
 
 table td, table th {
@@ -33,6 +34,7 @@ table a:link, table a:visited {
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
+	border-radius: 5px;
 }
 
 table a:hover, table a:active {
